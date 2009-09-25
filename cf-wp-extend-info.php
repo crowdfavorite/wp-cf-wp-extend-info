@@ -27,7 +27,7 @@ function cf_theme_info($slug, $key) {
 function cfwpei_api_info($slug, $key, $type) {
 	$data = cfwpei_get_api_data($slug, $type);
 	if (isset($data->$key)) {
-		return $data->key;
+		return $data->$key;
 	}
 	return false;
 }
@@ -43,7 +43,7 @@ function cfwpei_get_api_data($slug, $type) {
 	}
 	// check remote, cache
 	else if ($data = cfwpei_get_remote_data($slug, $type)) {
-		cfwpei_cache_data($data);
+		cfwpei_cache_data($data, $type);
 		return $data;
 	}
 	// return any cached data we might have - some data better than no data
