@@ -70,7 +70,9 @@ function cfwpei_get_remote_data($slug, $type) {
 			$data = plugins_api('plugin_information', array('slug' => $slug));
 			break;
 		case 'theme':
-			require_once(ABSPATH.'wp-admin/includes/theme-install.php');
+			global $wp_version;
+			$file = 'theme'.(version_compare('3.1', $wp_version, '<') ? '-install', '').'.php';
+			require_once(ABSPATH.'wp-admin/includes/'.$file);
 			$data = themes_api('theme_information', array('slug' => $slug));
 			break;
 	}
