@@ -3,7 +3,7 @@
 Plugin Name: CF WP.org Extend Info 
 Plugin URI: http://crowdfavorite.com/wordpress/ 
 Description: Get plugin and theme information from the wordpress.org API. Includes local caching with filtered cache timeout setting. 
-Version: 1.0 
+Version: 1.1 
 Author: Crowd Favorite
 Author URI: http://crowdfavorite.com
 */
@@ -36,7 +36,10 @@ function cfwpei_cache_time() {
 	return apply_filters('cfwpei_cache_time', 3600); // 1 hour default
 }
 
-function cfwpei_get_api_data($slug, $type) {
+function cfwpei_get_api_data($slug = '', $type = 'plugin') {
+	if (empty($slug)) {
+		return false;
+	}
 	// check cache
 	if ($data = cfwpei_get_cached_data($slug, $type)) {
 		return $data;
